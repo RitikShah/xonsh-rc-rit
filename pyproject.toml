@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "xonsh-rc-rit"
+version = "0.1.0"
+description = "🐚 My Xonsh RC"
+authors = ["RitikShah <ritik10.shah@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[[tool.poetry.packages]]
+include = "xontrib/*.xsh"
+
+[[tool.poetry.packages]]
+include = "xontrib/*.py"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+xonsh = {version= "^0.13.4", extras= ["full"] }
+
+pandas = "^2.0.0"
+hunter = "^3.5.1"
+
+nbtlib = "1.12.1"
+
+xonsh-vox-tabcomplete = "^0.5"
+xontrib-abbrevs = "^0.0.1"
+xontrib-avox-poetry = "^0.3.3"
+xontrib-bashisms = "^0.0.5"
+xontrib-cd = "^0.3.0"
+xontrib-debug-tools = "^0.0.1"
+xontrib-homebrew = "^0.2.1"
+xontrib-jedi = "^0.0.2"
+xontrib-langenv = "^1.2.1"
+xontrib-mod = "^0.1.0"
+xontrib-onepath = "^0.3.2"
+xontrib-prompt-starship = "^0.3.4"
+xontrib-readable-traceback = "^0.4.0"
+xontrib-sh = "^0.3.0"
+xontrib-vox = "^0.0.1"
+xontrib-whole-word-jumping = "^0.0.1"
+xontrib-xlsd = "^0.1.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

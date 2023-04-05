@@ -1,53 +1,90 @@
 <p align="center">
-Awesome snippets of code for xonshrc in xonsh shell. 
+🐚 Rit's Xonsh-RC
 </p>
 
 <p align="center">
-If you like the idea click ⭐ on the repo and <a href="https://twitter.com/intent/tweet?text=The%20xonsh%20shell%20awesome%20rc%20file!&url=https://github.com/anki-code/awesome-xonshrc" target="_blank">tweet</a>.
+If you like my <code>xonsh-rc</code> file, click the ⭐ on the repo.
 </p>
 
-### Use cases
+# Hello 👋🏽
 
-#### Create your own pip-installable RC based on the awesome xonsh RC
+I've been a `xonsh` user for nearly 3 years now and have developed my `.xonshrc` file and setup over that time, adding various tweaks and quirks.
 
-1. Fork this repository
-2. Rename the repository to `xontrib-rc-yourname`
-3. Change the name [in setup.py](https://github.com/anki-code/xontrib-rc-awesome/blob/e21370c1155262b8e25bd354cb4d4f9f15945384/setup.py#L11)
-4. Change the name of `xontrib/rc_awesome.xsh` to `xontrib/rc_yourname.xsh`
-5. [Add xontribs you need to setup.py](https://github.com/anki-code/xontrib-rc-awesome/blob/495dce4c8e7e8c9882ea002db60935d03f3fb861/setup.py#L20-L38) (the xontribs will be installed automatically during `pip install`)
-6. Now you can just run anywhere:
-    ```xonsh
-    pip install -U git+https://github.com/yourname/xontrib-rc-yourname
-    echo 'xontrib load rc_yourname' >> ~/.xonshrc
-    xonsh
-    ```
-7. [Increment version](https://github.com/anki-code/xontrib-rc-awesome/blob/df5c0aa3e29325f5d926cec7022cd2ccc184c0c5/setup.py#L12) to update the package using `pip install -U git+https://github.com/yourname/xontrib-rc-yourname`
+As I started to optimize, I realized my setup is a bit jank and hard to replicate which led me to [xontrib-rc-awesome](https://github.com/anki-code/xontrib-rc-awesome).
 
-#### Copy and paste
 
-Just read [rc_awesome](https://github.com/anki-code/xontrib-rc-awesome/blob/main/xontrib/rc_awesome.xsh) and copy the snippets to your xonsh RC.
+## Setup
 
-Or add awesome xonsh RC to the end of your xonshrc:
-```
-curl -s https://raw.githubusercontent.com/anki-code/xontrib-rc-awesome/main/xontrib/rc_awesome.xsh >> ~/.xonshrc
+Generally, I follow these steps when setting up xonsh (and my python).
+
+I use [brew](brew.sh) as my MacOS package manager and [pyenv](https://github.com/pyenv/pyenv) to help manage my multitude of python versions.
+
+> *Note*: I want to explore the [rtx](https://github.com/jdxcode/rtx#comparison-to-asdf) project as an alternative, but haven't gotten around to it yet!
+
+```bash
+brew install pyenv
+
+pyenv install <latest-python>
+pyenv global <latest-python>
 ```
 
-Or install awesome [xonsh RC as a package](https://github.com/anki-code/xontrib-rc-awesome/blob/fabe895fbdd89f7bd3050bf492aa0665624a9705/setup.py#L10-L16) with [automatically installable xontribs](https://github.com/anki-code/xontrib-rc-awesome/blob/fabe895fbdd89f7bd3050bf492aa0665624a9705/setup.py#L20-L30):
-```xonsh
-pip install -U git+https://github.com/anki-code/xontrib-rc-awesome
-echo 'xontrib load rc_awesome' >> ~/.xonshrc
-xonsh
+I use `pipx` to help manage my python tools and apps!
+
+```bash
+brew install pipx
+
+pipx install poetry
+pipx install "xonsh[full]"
 ```
 
-#### Learn from xonsh RC gurus
+Lastly, I change my favorite terminals to use my `xonsh` executable on start-up! I use `xpip` to help install more things into my `xonsh` environment. Note `pipx inject xonsh <deps>` works as well.
 
-* [Anthony Scopatz RC](https://github.com/xonsh/xonsh/pull/3917#issuecomment-715649009) (click Details to see the xonshrc)
-* [Sean Farley RC](https://github.com/seanfarley/dotfiles/blob/c87811f50cd696a8d4ddce83c1ca295a00b70218/xonshrc)
-* [Gyuri Horak RC](https://github.com/dyuri/rcfiles/blob/master/.xonshrc)
-* [Alexander Sosedkin RC](https://github.com/t184256/nix-configs/tree/main/user/xonsh/config)
-* [Noorhteen Raja NJ RC](https://github.com/jnoortheen/xonfig)
-* [Ryan Delaney RC](https://github.com/rpdelaney/dotfiles/tree/main/home/.config/xonsh)
+Other dependencies..
 
-### See also
-* [xonsh-cheatsheet](https://github.com/anki-code/xonsh-cheatsheet/blob/main/README.md) - cheat sheet for xonsh shell with copy-pastable examples.
-* [xontrib-template](https://github.com/xonsh/xontrib-template) - Full-featured template for building extension (xontrib) for the xonsh shell.
+```bash
+brew install starship
+brew install zoxide
+```
+
+Finally, to load my `rc`:
+
+```bash
+xpip install -U "git+https://github.com/RitikShah/xonsh-rc"
+echo 'xontrib load rc_yourname' >> ~/.xonshrc
+xonsh  # or close and reopen
+```
+
+🎉 Welcome to **`xonsh`** 🎉
+
+## Structure
+
+My entrypoint is `rc.xsh`, which I try to keep as *light* as possible.
+
+I then source everything within my mods folder kinda like an extension. These are loaded async which means my prompt may load before every extension is loaded!
+
+
+## FAQ
+
+> What is [xonsh](xon.sh)?
+
+Xonsh is a python-bash hybrid shell-alternative. It is python-based with a warm and friendly community, with lots to explore.
+
+> Why do I use xonsh?
+
+Xonsh lets me use my shell with my most comfortable language, Python. Rather than stumbling through bash commands, I can confidently write python to fufill my daily shell needs. I also can tinker and add fancy or useful new features in python as well, which lets me personalize my execution environment.
+
+*If you have heard of unix or android ricing, `xonsh` is my form of "shell ricing"* 
+
+> But my shell is cool too!
+
+It probably is and also could have cooler features than mine. This is just the shell *I* use!
+
+> I'm curious, but what's the catch?
+
+*In Python-land, speed is no fair maiden.*
+
+Xonsh does startup a bit slower than your favorite shell. While, this *is* due to using python, it's also due to the amount of bloat we casually add to our rc-files (which is not exclusive to `xonsh`).
+
+The slowdown isn't that determintal to my workflow and once loaded, you feel no different 🙂.
+
+Xonsh also isn't purely bash-compatible, even much less so than [zsh](https://zsh.sourceforge.io/) and [fish](https://fishshell.com/). While I do think 100% bash-compatibility isn't *that* useful in my daily shell, it might be for you.
