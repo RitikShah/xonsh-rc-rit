@@ -13,11 +13,6 @@ def main():
 
     from contextlib import suppress
 
-    @aliasify("t")
-    def tmux_helper(args):
-        name = args[0]
-        tmux new -s @(name) xonsh
-
     @aliasify
     def toggle_python():
         global _cache, _to_remove

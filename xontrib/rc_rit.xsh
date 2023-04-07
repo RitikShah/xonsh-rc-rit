@@ -170,6 +170,7 @@ def main():
 
         # vscode
         'code': 'open -a "Visual Studio Code"',
+        'work-code': 'open -a "Visual Studio Code - Insiders"',
 
         # reconfig xonsh
         'config': 'code ~/Life/Things/MC2/dev/xonsh-rc',

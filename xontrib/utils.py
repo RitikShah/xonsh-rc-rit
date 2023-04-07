@@ -42,12 +42,9 @@ def yieldify(func: Callable[[], Generator[str | None, None, None]]):
 def aliasify(name_or_func):
     global aliases
 
-    def decorator(func):
-        aliases[name] = func
-    
     match name_or_func:
         case str(name):
-            return decorator
+            return aliases.register(name)
 
         case func:
-            aliases[func.__name__] = func
+            aliases.register(func.__name__)(func)
