@@ -42,6 +42,7 @@ Lastly, I change my favorite terminals to use my `xonsh` executable on start-up!
 Other dependencies..
 
 ```bash
+brew install rtx
 brew install starship
 brew install zoxide
 ```
