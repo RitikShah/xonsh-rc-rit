@@ -28,48 +28,6 @@ def main():
 
     yield "filterwarning"
 
-    $PROMPT_FIELDS['prompt_end'] = '@'
-
-    # Do not write the command to the history if it was ended by `###`
-    $XONSH_HISTORY_IGNORE_REGEX = '.*(\\#\\#\\#\\s*)$'
-
-    # Remove front dot in multiline input to make the code copy-pastable.
-    $MULTILINE_PROMPT = ' '
-
-    # Suppress line "xonsh: For full traceback set: $XONSH_SHOW_TRACEBACK = True" 
-    # in case of exceptions or wrong command.
-    $XONSH_SHOW_TRACEBACK = False
-
-    # Suppress line "Did you mean one of the following?"
-    $SUGGEST_COMMANDS = False
-
-    # Flag for automatically pushing directories onto the directory stack
-    #  i.e. `dirs -p` (https://xon.sh/aliases.html#dirs).
-    $AUTO_PUSHD = True
-
-    $XONTRIB_CD_LONG_DURATION = 5  # default
-
-    # defaults
-    $PYTHON_MODE = False
-    $LAST_DIR = []
-    $RUNNING_BACK = False
-
-    # iPython
-    $PYTHONBREAKPOINT = 'IPython.core.debugger.set_trace'
-
-    # Use sqlite for history and ignore duplicate commands
-    $XONSH_HISTORY_BACKEND = 'sqlite'
-    $HISTCONTROL='ignoredups'
-
-    # change to pyenv
-    $PYENV_ROOT = p"~/.pyenv".resolve()
-    $PIPX_DEFAULT_PYTHON=f"{$PYENV_ROOT}/shims/python"
-
-    $ENABLE_ASYNC_PROMPT = True
-
-    yield "envs"
-
-
     # Xontribs - https://github.com/topics/xontrib
     # print("  xontribs:")
     for _xontrib in (
@@ -137,6 +95,51 @@ def main():
         yield f"  loading {_xontrib}"
 
 
+    $PROMPT_FIELDS['prompt_end'] = '@'
+
+    # Do not write the command to the history if it was ended by `###`
+    $XONSH_HISTORY_IGNORE_REGEX = '.*(\\#\\#\\#\\s*)$'
+
+    # Remove front dot in multiline input to make the code copy-pastable.
+    $MULTILINE_PROMPT = ' '
+
+    # Suppress line "xonsh: For full traceback set: $XONSH_SHOW_TRACEBACK = True" 
+    # in case of exceptions or wrong command.
+    $XONSH_SHOW_TRACEBACK = False
+    $READABLE_TRACE_STRIP_PATH_ENV = True
+
+    # Suppress line "Did you mean one of the following?"
+    $SUGGEST_COMMANDS = False
+
+    # Flag for automatically pushing directories onto the directory stack
+    #  i.e. `dirs -p` (https://xon.sh/aliases.html#dirs).
+    $AUTO_PUSHD = True
+
+    $XONTRIB_CD_LONG_DURATION = 5  # default
+
+    # defaults
+    $PYTHON_MODE = False
+    $LAST_DIR = []
+    $RUNNING_BACK = False
+
+    # iPython
+    $PYTHONBREAKPOINT = 'IPython.core.debugger.set_trace'
+
+    # Use sqlite for history and ignore duplicate commands
+    $XONSH_HISTORY_BACKEND = 'sqlite'
+    $HISTCONTROL='ignoredups'
+
+    # change to pyenv
+    $PYENV_ROOT = p"~/.pyenv".resolve()
+    $PIPX_DEFAULT_PYTHON=f"{$PYENV_ROOT}/shims/python"
+
+    $ENABLE_ASYNC_PROMPT = True
+
+    # nvm
+    NVM_DIR="$HOME/.nvm"
+
+    yield "envs"
+
     # Adding aliases from dict
     global aliases
     aliases |= {
@@ -193,6 +196,9 @@ def main():
 
         # with auto-pushd, this is easy
         "back": "popd > /dev/null",
+
+        # shortcut to query, useful for piping
+        "zq": "zoxide query",
     }
 
     yield "aliases"

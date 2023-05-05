@@ -7,6 +7,7 @@ _to_remove = set()
 def _post_command(cmd: str, rtn: int, out: str or None, ts: list):
     global _cache
     if $PYTHON_MODE:
+        $TOGGLE_PYTHON_INCR += 1
         if _cache:
             c = set(globals().keys())
             additive_difference = c - _cache

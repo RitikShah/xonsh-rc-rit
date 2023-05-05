@@ -24,12 +24,14 @@ def main():
                 'Python ' + sys.version
             )
             $OLD_PROMPT = $PROMPT
-            $PROMPT = '> '
+            $PROMPT = '>>> '
+            $MULTILINE_PROMPT = '... '
             _cache = set(globals().keys())
             aliases['exit_backup'] = aliases['exit']
-            aliases['exit'] = aliases['toggle_python']
+            aliases['exit'] = aliases['toggle-python']
             $XONSH_SHOW_TRACEBACK = True
             globals()["__IPYTHON__"] = True
+            $TOGGLE_PYTHON_INCR = 0
 
         else:
             rich.print(
@@ -47,11 +49,16 @@ def main():
                         del globals()[var]
 
             $PROMPT = $OLD_PROMPT
+            $MULTILINE_PROMPT = ' '
             _to_remove = set()
 
             aliases['exit'] = aliases['exit_backup']
             $XONSH_SHOW_TRACEBACK = False
             del globals()["__IPYTHON__"]
+
+            $TOGGLE_PYTHON_LAST_SESSION = $(history show ::@($TOGGLE_PYTHON_INCR))
+    
+    
 
 
     @aliasify
